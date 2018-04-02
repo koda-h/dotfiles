@@ -1,0 +1,12 @@
+#!/bin/bash
+CONNECT_HOSTNAME=${1}
+
+cat ~/.ssh/config.d/* > ~/.ssh/config
+chmod 600 ~/.ssh/config
+
+tmux rename-window ${CONNECT_HOSTNAME}
+tmux pipe-pane
+tmux pipe-pane -o '/bin/sh -c "~/bin/tmux_logging.sh ~/.tmux/log #S #I #P #W"'
+
+/usr/bin/ssh $*
+tmux rename-window $(basename $(echo $SHELL))

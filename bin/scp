@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+function scp_wrap {
+  local -a args
+  local i
+  for i in "$@";
+  do
+    case $i in
+      (*:*) args+=($i) ;;
+      (*) args+=(${~i}) ;;
+    esac
+  done
+  command /usr/bin/scp "${(@)args}"
+}
+
+noglob scp_wrap "$@"
