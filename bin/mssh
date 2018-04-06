@@ -47,7 +47,7 @@ function peco_select_mode {
     rm -f ~/.ssh/config
     cat ~/.ssh/config.d/* > ~/.ssh/config
   fi
-  local hosts=$(grep "^\s*Host " ~/.ssh/config | sed s/"[\s ]*Host "// | grep -v "^\*$" | sort | peco)
+  local hosts=$(grep "^\s*Host " ~/.ssh/config | sed s/"[\s ]*Host "// | grep -v "^\*$" |grep -v "*"| sort | peco)
 
   HOST1=`echo $hosts |awk '{print $1}'`
   HOST_LIST=`echo $hosts|awk -F' ' '{for(i=2;i<NF;i++){printf("%s%s",$i,OFS=" ")}print $NF}'`
@@ -89,6 +89,8 @@ window=multi-ssh
 if [ -z "`pgrep tmux`" ]; then
   tmux new-session -d -n $window -s $session
 fi
+
+[ -z "${HOST1}" ] && exit 1
 
 ### 各ホストにsshログイン
 # 最初の1台はsshするだけ
