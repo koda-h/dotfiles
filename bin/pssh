@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# peco ssh connection
+
+function peco_select_mode {
+  if [ -d "~/.ssh/config.d" ]; then
+    rm -f ~/.ssh/config
+    cat ~/.ssh/config.d/* > ~/.ssh/config
+  fi
+  local hosts=$(grep "^\s*Host " ~/.ssh/config | sed s/"[\s ]*Host "// | grep -v "^\*$" |grep -v "*"| sort | peco)
+
+  HOST1=`echo $hosts |awk '{print $1}'`
+}
+
+peco_select_mode
+
+[ -z "${HOST1}" ] && exit 1
+
+tmux rename-window ${HOST1}
+tmux pipe-pane
+tmux pipe-pane -o '/bin/sh -c "~/bin/tmux_logging.sh ~/.tmux/log #S #I #P #W"'
+
+/usr/bin/ssh $*
+tmux rename-window $(basename $(echo $SHELL))
+
+exit 0
