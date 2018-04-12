@@ -20,7 +20,8 @@ tmux rename-window ${HOST1}
 tmux pipe-pane
 tmux pipe-pane -o '/bin/sh -c "~/bin/tmux_logging.sh ~/.tmux/log #S #I #P #W"'
 
-/usr/bin/ssh $*
+echo "ssh login ${HOST1}"
+/usr/bin/ssh ${HOST1}
 tmux rename-window $(basename $(echo $SHELL))
 
 exit 0
