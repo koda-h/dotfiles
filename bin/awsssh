@@ -1,0 +1,9 @@
+#!/bin/bash
+
+case ${1} in
+  criadevbastion ) HOST="i-0cc0996d2dd162994 --region ap-northeast-1 --profile cria-dev -i ~/.ssh/cria.pem" ;;
+  criadevdb ) HOST="i-0cc0996d2dd162994 --profile cria-dev --region ap-northeast-1 -L 3306:maebarai-development.ccsxuwwmabkx.ap-northeast-1.rds.amazonaws.com:3306 -i ~/.ssh/cria.pem" ;;
+  criaprdbastion1 ) HOST="i-0654c258b689d5907 --region ap-northeast-1 --profile cria-prd -i ~/.ssh/cria_prd.pem" ;;
+  criaprdbastion2 ) HOST="i-0ce4ef8aff00ff8c9 --region ap-northeast-1 --profile cria-prd -i ~/.ssh/cria_prd.pem" ;;
+esac
+/usr/local/bin/awsssh ${HOST}
