@@ -1,0 +1,17 @@
+[alias]
+  st = status
+  co = checkout
+  br = branch
+[user]
+	name = KODA Hiroshi
+	email = koda@metaps-payment.com
+[core]
+    # UTF-8のエンコード指定を含むvimの設定例。
+    editor = vim --nofork -c 'set fenc=utf-8' +1
+[pager]
+    branch = cat
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
