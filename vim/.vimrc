@@ -455,6 +455,7 @@ set listchars=tab:»-,trail:-,nbsp:%,eol:↲
 
 " カラースキーマの設定
 colorscheme molokai
+highlight CursorLineNr term=bold cterm=bold ctermfg=012 gui=bold
 
 " vim-jsonのダブルクォート非表示機能を無効化
 set conceallevel=0
