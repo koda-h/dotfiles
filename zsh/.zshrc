@@ -13,10 +13,8 @@ fi
 # Customize to your needs...
 PATH=$HOME/bin:$PATH
 
-alias vi="/usr/local/bin/vim"
 alias diff="colordiff -u"
 
-#source ~/.zsh.d/z.sh
 source ~/bin/peco_func
 
 export LESS='-g -i -M -r -w -z-4'
