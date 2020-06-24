@@ -9,6 +9,7 @@
 
 brew install python3
 brew install tig
+brew install colordiff
 
 ln -s /usr/local/bin/pip3 /usr/local/bin/pip
 ln -s /usr/local/bin/python3 /usr/local/bin/python
