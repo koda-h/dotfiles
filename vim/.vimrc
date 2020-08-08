@@ -303,6 +303,7 @@ nmap <C-l> @q
 " 全選択
 nmap <C-a> ggVG
 
+nnoremap ' :QuickRun
 nnoremap / :M/
 nnoremap ? :M?
 nnoremap ,/ /
@@ -396,6 +397,7 @@ if dein#load_state(s:plugin_dir)
   call dein#add('tpope/vim-fugitive')
   call dein#add('kmnk/vim-unite-giti')
   call dein#add('tomasr/molokai')
+  call dein#add('thinca/vim-quickrun')
 
   " サブディレクトリを指定してdein#add()する場合
   " frozenオプションは自動で更新しない
