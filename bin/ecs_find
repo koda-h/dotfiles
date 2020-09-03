@@ -17,8 +17,8 @@ fi
 
 for NO in 1 2 3 4 5
 do
-  echo "ssh ${ENV}ecs${NO} docker ps |grep ${SERVICE}|grep ${CONTAINER_TYPE}"
-  RET=$(ssh ${ENV}ecs${NO} docker ps |grep ${SERVICE}|grep ${CONTAINER_TYPE})
+  echo "ssh ${ENV}ecs${NO} docker ps awk | '{print \$1,\$2}' |grep ${SERVICE}-${CONTAINER_TYPE}"
+  RET=$(ssh ${ENV}ecs${NO} docker ps |awk '{print $1,$2}' | grep ${SERVICE}-${CONTAINER_TYPE})
 
   if [ -n "${RET}" ]; then
     CONTAINER_ID=$(echo ${RET}|awk '{print $1}')
