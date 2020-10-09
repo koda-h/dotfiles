@@ -303,6 +303,7 @@ nmap <C-l> @q
 " 全選択
 nmap <C-a> ggVG
 
+nnoremap q1 :qa!
 nnoremap ' :QuickRun
 nnoremap / :M/
 nnoremap ? :M?
