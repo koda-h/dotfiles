@@ -10,9 +10,9 @@ if [ -z "${2}" ]; then
   exit
 fi
 if [ -n "${3}" ]; then
-  CONTAINER_TYPE=${3}
+  CONTAINER_TYPE=${3}:
 else
-  CONTAINER_TYPE=app
+  CONTAINER_TYPE=app:
 fi
 
 for NO in 1 2 3 4 5
