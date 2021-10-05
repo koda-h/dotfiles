@@ -15,17 +15,18 @@ else
   CONTAINER_TYPE=app
 fi
 
-for NO in 1 2 3 4 5
+for NO in 1 2 3 4
 do
-  echo "ssh ${ENV}ecs${NO} docker ps awk | '{print \$1,\$2}' |grep ${SERVICE}-${CONTAINER_TYPE}"
-  RET=$(ssh ${ENV}ecs${NO} docker ps |awk '{print $1,$2}' | grep ${SERVICE}-${CONTAINER_TYPE})
+  # ${ENV}ecs${NO} のsshするホスト名の部分は各自の環境に合わせてください
+  echo "ssh ${ENV}ecs${NO} docker ps |grep ${SERVICE}|grep ${CONTAINER_TYPE}"
+  RET=$(ssh ${ENV}ecs${NO} docker ps |grep ${SERVICE}|grep ${CONTAINER_TYPE})
 
   if [ -n "${RET}" ]; then
     CONTAINER_ID=$(echo ${RET}|awk '{print $1}')
     echo "###############################################"
     echo " ${CONTAINER_TYPE} container id is ${CONTAINER_ID}"
     echo "###############################################"
-    ssh ${ENV}ecs${NO}
+    /usr/bin/ssh -tt ${ENV}ecs${NO} dlogin ${CONTAINER_ID}
     exit
   fi
 done
