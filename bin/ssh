@@ -4,7 +4,9 @@ CONNECT_HOSTNAME=${1}
 cat ~/.ssh/config.d/* > ~/.ssh/config
 chmod 600 ~/.ssh/config
 
-tmux rename-window ${CONNECT_HOSTNAME}
+if [ "${CONNECT_HOSTNAME}" != "-o" ];then #avoidance git pull error
+  tmux rename-window ${CONNECT_HOSTNAME}
+fi
 tmux pipe-pane
 tmux pipe-pane -o '/bin/sh -c "~/bin/tmux_logging.sh ~/.tmux/log #S #I #P #W"'
 
