@@ -5,7 +5,7 @@ SERVICE=${2}
 
 if [ -z "${2}" ]; then
   echo "usage:"
-  echo "  esc_find {ENV} {SERVICE}"
+  echo "  esc_find {ENV} {SERVICE(optional)} {HOST(optional)}"
   echo "  ex) esc_find mpfront njr"
   exit
 fi
@@ -15,7 +15,13 @@ else
   CONTAINER_TYPE=app:
 fi
 
-for NO in 1 2 3 4 5
+if [ -n "${4}" ]; then
+  LIST=(${4})
+else
+  LIST=(1 2 3 4 5)
+fi
+
+for NO in ${LIST[@]}
 do
   echo "ssh ${ENV}ecs${NO} docker ps awk | '{print \$1,\$2}' |grep ${SERVICE}-${CONTAINER_TYPE}"
   RET=$(ssh ${ENV}ecs${NO} docker ps |awk '{print $1,$2}' | grep ${SERVICE}-${CONTAINER_TYPE})
@@ -25,7 +31,7 @@ do
     echo "###############################################"
     echo " ${CONTAINER_TYPE} container id is ${CONTAINER_ID}"
     echo "###############################################"
-    ssh ${ENV}ecs${NO}
+    /usr/bin/ssh -tt ${ENV}ecs${NO} dlogin ${CONTAINER_ID}
     exit
   fi
 done
