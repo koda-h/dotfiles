@@ -23,7 +23,7 @@ fi
 
 for NO in ${LIST[@]}
 do
-  echo "ssh ${ENV}ecs${NO} docker ps awk | '{print \$1,\$2}' |grep ${SERVICE}-${CONTAINER_TYPE}"
+  echo "ssh ${ENV}ecs${NO} docker ps |awk | '{print \$1,\$2}' |grep ${SERVICE}-${CONTAINER_TYPE}"
   RET=$(ssh ${ENV}ecs${NO} docker ps |awk '{print $1,$2}' | grep ${SERVICE}-${CONTAINER_TYPE})
 
   if [ -n "${RET}" ]; then

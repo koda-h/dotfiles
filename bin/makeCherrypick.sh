@@ -7,6 +7,9 @@
 # 　・オプション未指定の場合は全ログを出力
 # 　・生成する実行ファイル名は「変数：exefilename」で指定した文字列
 # 　・生成する実行ファイルが存在している場合は上書きする
+# ex)
+# makeCherrypick.sh 32dfeg..HEAD       # 32dfeg 以降すべてのコミット
+# makeCherrypick.sh 32dfeg..7ab5191    # 32dfeg 以降 ～ 7ab5191 までのコミット
 
 exefilename='git_cherrypick.sh';
 ops=$@;

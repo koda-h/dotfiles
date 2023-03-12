@@ -2,6 +2,7 @@
   st = status
   co = checkout
   br = branch
+  cp = cherry-pick
 [user]
 	name = KODA Hiroshi
 	email = koda@metaps-payment.com
@@ -15,3 +16,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	defaultBranch = main
+[commit]
+	template = /Users/lude/.gitmessage.txt
