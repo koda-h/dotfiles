@@ -13,6 +13,8 @@ brew install colordiff
 
 ln -s /usr/local/bin/pip3 /usr/local/bin/pip
 ln -s /usr/local/bin/python3 /usr/local/bin/python
+ln -s /opt/homebrew/bin/pip3 /opt/homebrew/bin/pip
+ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
 
 DOTFILES_DIR=$(pwd)
 ln -s $DOTFILES_DIR/bin ~/
@@ -33,7 +35,6 @@ ln -s $DOTFILES_DIR/git/.tigrc ~/
 
 ln -s $DOTFILES_DIR/vim/ ~/.vim
 ln -s ~/.vim/.vimrc ~/
-ln -s /usr/bin/vim /usr/local/bin/vim
 
 
 ###############
@@ -45,7 +46,9 @@ cd ~/
 
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
- setopt EXTENDED_GLOB
+chsh -s /bin/zsh
+
+setopt EXTENDED_GLOB
 for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
@@ -73,7 +76,7 @@ rm -rf fonts
 
 brew tap sanemat/font
 brew install ricty --with-powerline
-cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+cp -f /opt/homebrew/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
 fc-cache -vf
 
 brew install tmux
@@ -86,8 +89,6 @@ SITE_PACKAGES_DIR=$(pwd)
 
 cd $DOTFILES_DIR
 
-$SITE_PACKAGES_DIR/powerline/bindings/tmux/powerline.conf
-
 sed -i '.bak'  "s%source\ powerline.conf%source ${SITE_PACKAGES_DIR}/powerline/bindings/tmux/powerline.conf%g" tmux/.tmux.conf
 rm -f tmux/.tmux.conf.bak
 
@@ -95,6 +96,4 @@ ln -s $DOTFILES_DIR/tmux/.tmux.conf ~/
 
 mkdir ~/.config/powerline/
 cp -rp ${SITE_PACKAGES_DIR}/powerline/config_files/* ~/.config/powerline/
-
-p -pr ~/.pyenv/versions/3.8.2/lib/python3.8/site-packages/powerline/config_files/* ~/.config/powerline/
 

@@ -1,5 +1,11 @@
 #!/bin/bash
 CONNECT_HOSTNAME=${1}
+IS_GITHUB_CONNECT=0
+
+echo $* |grep github > /dev/null
+if [ "$?" = "0" ]; then
+  IS_GITHUB_CONNECT=1
+fi
 
 cat ~/.ssh/config.d/* > ~/.ssh/config
 chmod 600 ~/.ssh/config
@@ -10,5 +16,25 @@ fi
 tmux pipe-pane
 tmux pipe-pane -o '/bin/sh -c "~/bin/tmux_logging.sh ~/.tmux/log #S #I #P #W"'
 
-/usr/bin/ssh $*
+if [ "$IS_GITHUB_CONNECT" = "1" ]; then
+  /usr/bin/ssh $*
+  exit
+fi
+
+TMP_FILE=$(mktemp)
+
+/usr/bin/ssh $* 2> $TMP_FILE
+RET=$?
+
+if [ "$RET" = "255" ]; then
+  DELETE_HOST=$(grep "Host key for" $TMP_FILE |awk '{print $4}')
+  if [ -n "$DELETE_HOST" ]; then
+    echo "REMOTE HOST IDENTIFICATION HAS CHANGED! DELETE HOST KEY FROM ~/.ssh/known_hosts"
+    ssh-keygen -R $DELETE_HOST
+    /usr/bin/ssh $*
+  fi
+fi
+
+rm $TMP_FILE
+
 tmux rename-window $(basename $(echo $SHELL))

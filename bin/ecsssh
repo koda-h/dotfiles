@@ -2,29 +2,31 @@
 
 ENV=${1}
 SERVICE=${2}
-
+if [ "${ENV}" = "mct" ]; then
+  SERVICE="${SERVICE}-mct"
+fi
 if [ -z "${2}" ]; then
   echo "usage:"
-  echo "  esc_find {ENV} {SERVICE(optional)} {HOST(optional)}"
-  echo "  ex) esc_find mpfront njr"
+  echo "  escssh {ENV} {SERVICE(optional)} {HOST(optional)}"
+  echo "  ex) esc_find mpfront kaihipay"
   exit
 fi
 if [ -n "${3}" ]; then
-  CONTAINER_TYPE=${3}:
+  CONTAINER_TYPE="${3}"
 else
-  CONTAINER_TYPE=app:
+  CONTAINER_TYPE="app"
 fi
 
 if [ -n "${4}" ]; then
   LIST=(${4})
 else
-  LIST=(1 2 3 4 5)
+  LIST=(1 2 3 4 5 6)
 fi
 
 for NO in ${LIST[@]}
 do
-  echo "ssh ${ENV}ecs${NO} docker ps |awk | '{print \$1,\$2}' |grep ${SERVICE}-${CONTAINER_TYPE}"
-  RET=$(ssh ${ENV}ecs${NO} docker ps |awk '{print $1,$2}' | grep ${SERVICE}-${CONTAINER_TYPE})
+  echo "ssh ${ENV}ecs${NO} docker ps |awk '{print \$1,\$2}' |grep ${SERVICE}-${CONTAINER_TYPE}:"
+  RET=$(ssh ${ENV}ecs${NO} docker ps |awk '{print $1,$2}' | grep ${SERVICE}-${CONTAINER_TYPE}):
 
   if [ -n "${RET}" ]; then
     CONTAINER_ID=$(echo ${RET}|awk '{print $1}')

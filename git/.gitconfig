@@ -5,10 +5,10 @@
   cp = cherry-pick
 [user]
 	name = KODA Hiroshi
-	email = koda@metaps-payment.com
+	email = koda@paymentfor.com
 [core]
     # UTF-8のエンコード指定を含むvimの設定例。
-    editor = vim --nofork -c 'set fenc=utf-8' +1
+    editor = /usr/bin/vim --nofork -c 'set fenc=utf-8' +1
 [pager]
     branch = cat
 [filter "lfs"]
@@ -19,4 +19,4 @@
 [init]
 	defaultBranch = main
 [commit]
-	template = /Users/lude/.gitmessage.txt
+	template = /Users/koda/.gitmessage

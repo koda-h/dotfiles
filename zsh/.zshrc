@@ -11,9 +11,11 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-PATH=$HOME/bin:$PATH
-
+PATH=/opt/homebrew/bin:$HOME/bin:$PATH
 alias diff="colordiff -u"
+alias awsp="source _awsp"
+alias tf="terraform"
+#alias awsp=" ~/.zshrc"
 
 source ~/bin/peco_func
 
@@ -28,6 +30,18 @@ export LESS='-g -i -M -r -w -z-4'
 
 export EDITOR=/usr/local/bin/vim
 export GIT_EDITOR=/usr/local/bin/vim
+export COMPOSE_MENU=0
 
-unsetopt promptcr
+#unsetopt promptcr
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
