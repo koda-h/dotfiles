@@ -25,3 +25,6 @@ export EDITOR=/usr/local/bin/vim
 export GIT_EDITOR=/usr/local/bin/vim
 export COMPOSE_MENU=0
 
+preexec() {
+  print -P "%F{238}Run datetime:%f %F{238}%D{%Y-%m-%d %H:%M:%S}%f"
+}
