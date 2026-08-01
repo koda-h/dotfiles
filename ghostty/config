@@ -2,6 +2,7 @@ env = EDITOR=vim
 env = LANG=ja_JP.UTF-8
 font-family = "MesloLGS Nerd Font"
 #font-family = "UDEV Gothic NF"
+font-feature = -liga
 window-padding-x = 0
 window-padding-y = 0
 font-size=14

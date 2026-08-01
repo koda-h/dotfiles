@@ -80,3 +80,10 @@ brew install reattach-to-user-namespace
 
 ln -s $DOTFILES_DIR/tmux/.tmux.conf ~/
 
+###############
+#
+# ghostty setting
+#
+###############
+
+ln -s $DOTFILES_DIR/ghostty ~/.config
