@@ -87,3 +87,12 @@ ln -s $DOTFILES_DIR/tmux/.tmux.conf ~/
 ###############
 
 ln -s $DOTFILES_DIR/ghostty ~/.config
+
+###############
+#
+# peco install
+#
+###############
+
+brew install peco
+
